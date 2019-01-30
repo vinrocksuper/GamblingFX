@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -23,7 +24,6 @@ public class LoginController {
     @FXML private Pane pane;
     @FXML private JFXTextField usernameField;
     @FXML private JFXPasswordField passwordField;
-    @FXML private JFXButton createAccountButton;
     private CSVReader csvReader;
 
     /**
@@ -64,5 +64,6 @@ public class LoginController {
         Parent newRoot = FXMLLoader.load(getClass().getResource("/Resources/FXML/AccountCreation.fxml"));
         Stage currentStage = (Stage) pane.getScene().getWindow();
         currentStage.setScene(new Scene(newRoot, 600, 400));
+        currentStage.getScene().setFill(Color.TRANSPARENT);
     }
 }
