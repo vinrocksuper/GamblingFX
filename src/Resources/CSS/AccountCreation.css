@@ -1,0 +1,10 @@
+.root {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 20px;
+}
+
+.label {
+    -fx-font-family: "Space Mono";
+    -fx-pref-width: 200px;
+    -fx-pref-height: 50px;
+}
