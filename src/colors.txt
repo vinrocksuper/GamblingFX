@@ -1,0 +1,4 @@
+Colors for future GUI Reference.
+
+Background Color: #302E2F
+Buttons: #0b3da3 to #004dea
