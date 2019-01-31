@@ -1,4 +1,4 @@
 package Dependencies.Games;
 
-public class Roullete {
+public class Roulette {
 }
