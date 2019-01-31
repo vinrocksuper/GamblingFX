@@ -1,0 +1,26 @@
+.jfx-tab-pane
+{
+    -fx-padding: 1px;
+    -fx-background-color: white, -fx-control-inner-background;
+    -fx-background-insets: 0, 1;
+}
+
+.jfx-tab-pane .headers-region
+{
+    -fx-background-color: #275fba to #0f5fe0;
+}
+
+.jfx-tab-pane .tab-header-background
+{
+    -fx-background-color: #275fba to #0f5fe0;
+}
+
+.jfx-tab-pane .tab-header-area .jfx-rippler
+{
+    -jfx-rippler-fill: #9ec3ff;
+}
+
+.jfx-tab-pane .tab-header-area .tab-selected-line
+{
+    -fx-background-color: #ffffff;
+}

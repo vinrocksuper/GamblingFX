@@ -1,10 +1,18 @@
+* {
+    -fx-font-family: "Space Mono";
+}
+
 .root {
     -fx-background-color: #ffffff;
     -fx-background-radius: 20px;
 }
 
+.jfx-dialog {
+    -fx-background-color: rgba(0, 0, 0, 0);
+}
+
 .label {
-    -fx-font-family: "Space Mono";
-    -fx-pref-width: 200px;
-    -fx-pref-height: 50px;
+    -fx-background-color: rgba(0, 0, 0, 0);
+    -fx-text-fill: #0b3da3 to #004dea;
+    -fx-font-size: 14px;
 }

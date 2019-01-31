@@ -1,6 +1,7 @@
 package Controllers;
 
 import Dependencies.Systems.CSVReader;
+import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
@@ -9,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -20,7 +22,7 @@ import java.util.List;
 /**
  * Controller for the Account Creation Scene.
  * @Author Afaq Anwar
- * @Version 01/29/19
+ * @Version 01/30/19
  */
 public class AccountCreationController {
     @FXML private Pane pane;
@@ -28,7 +30,7 @@ public class AccountCreationController {
     @FXML private JFXTextField lastNameField;
     @FXML private JFXTextField usernameField;
     @FXML private JFXPasswordField passwordField;
-    @FXML private Label notification;
+    @FXML private StackPane stackPane;
     private CSVReader csvReader;
     private PrintWriter writer;
     private StringBuilder stringBuilder;
@@ -53,13 +55,28 @@ public class AccountCreationController {
      */
     @FXML
     private void createAccount() throws IOException {
-        if (!userExists()) {
+        if (!userExists() && fieldsAreValid()) {
             this.addCurrentData();
             this.writeToFile();
             this.switchSceneToLogin();
+        } else if (userExists()) {
+            JFXDialog dialog = new JFXDialog();
+            dialog.setContent(new Label("Error User Already Exists!"));
+            dialog.show(stackPane);
         } else {
-            notification.setText("User Already Exists!");
+            JFXDialog dialog = new JFXDialog();
+            dialog.setContent(new Label("Error please make sure to fill out all fields properly."));
+            dialog.show(stackPane);
         }
+    }
+
+    /**
+     * Makes sure all fields are correctly inputted.
+     * @return True if all fields meet the requirements, false otherwise.
+     */
+    private boolean fieldsAreValid() {
+        return firstNameField.getText().matches("[a-zA-Z]+") && lastNameField.getText().matches("[a-zA-Z]+")
+                && usernameField.getText().length() > 0 && passwordField.getText().length() > 0;
     }
 
     /**

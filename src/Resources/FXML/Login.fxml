@@ -4,6 +4,7 @@
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
 
 <Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="pane" stylesheets="@../CSS/Login.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.LoginController">
    <children>
@@ -11,5 +12,6 @@
       <JFXPasswordField fx:id="passwordField" layoutX="233.0" layoutY="246.0" promptText="Password" styleClass="password_field" />
       <JFXButton fx:id="createAccountButton" layoutX="238.0" layoutY="321.0" mnemonicParsing="false" onAction="#allowAccountCreation" styleClass="create_button" text="Create New Account" />
       <JFXButton layoutX="316.0" layoutY="296.0" mnemonicParsing="false" onAction="#checkLogin" styleClass="login_button" text="Login" />
+      <StackPane fx:id="stackPane" layoutX="66.0" layoutY="361.0" prefHeight="25.0" prefWidth="500.0" />
    </children>
 </Pane>

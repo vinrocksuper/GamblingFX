@@ -1,4 +1,6 @@
 Colors for future GUI Reference.
 
 Background Color: #302E2F
-Buttons: #0b3da3 to #004dea
+Buttons / Notifications Text: #0b3da3 to #004dea
+Dashboard Header: #275fba to #0f5fe0
+Rippler: #9ec3ff
