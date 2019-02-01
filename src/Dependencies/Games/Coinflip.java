@@ -1,7 +1,5 @@
 package Dependencies.Games;
 
-import java.awt.event.ActionEvent;
-
 public class Coinflip {
 
 /**

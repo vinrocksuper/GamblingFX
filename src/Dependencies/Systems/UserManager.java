@@ -12,19 +12,19 @@ public class UserManager {
     // ArrayList containing all active Users.
     private ArrayList<User> currentActiveUsers;
     // HashMap that maps each User ID with the status of the User.
-    private HashMap<Integer, String> statusOfUsers;
+    private HashMap<User, String> statusOfUsers;
 
     /**
      * Main Constructor.
      */
-    private void UserManager() {
+    public UserManager() {
         currentActiveUsers = new ArrayList<>();
         statusOfUsers = new HashMap<>();
     }
 
     // Getters for each Private Field.
-    public ArrayList getCurrentActiveUsers() { return this.currentActiveUsers; }
-    public HashMap getStatusOfUsers() { return this.statusOfUsers; }
+    public ArrayList<User> getCurrentActiveUsers() { return this.currentActiveUsers; }
+    public HashMap<User, String> getStatusOfUsers() { return this.statusOfUsers; }
 
 
     /**
@@ -45,8 +45,8 @@ public class UserManager {
      * @return String that represents the status of the User if the User exists, "NULL" otherwise.
      */
     public String getStatusOfUser(User user) {
-        if (statusOfUsers.containsKey(user.getUserID())) {
-            return statusOfUsers.get(user.getUserID());
+        if (statusOfUsers.containsKey(user)) {
+            return statusOfUsers.get(user);
         } else {
             return "NULL";
         }
@@ -58,10 +58,10 @@ public class UserManager {
      * @param status String that represents the current User status.
      */
     public void setStatusOfUser(User user, String status) {
-        if (!statusOfUsers.containsKey(user.getUserID())) {
-            statusOfUsers.put(user.getUserID(), status);
+        if (!statusOfUsers.containsKey(user)) {
+            statusOfUsers.put(user, status);
         } else {
-            statusOfUsers.replace(user.getUserID(), status);
+            statusOfUsers.replace(user, status);
         }
     }
 }

@@ -1,6 +1,7 @@
 package Controllers;
 
 import Dependencies.Systems.CSVReader;
+import Dependencies.Systems.User;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
@@ -20,7 +21,7 @@ import java.io.IOException;
 /**
  * Controller for the Login Scene.
  * @Author Afaq Anwar
- * @Version 01/30/19
+ * @Version 01/31/19
  */
 public class LoginController {
     @FXML private Pane pane;
@@ -28,6 +29,7 @@ public class LoginController {
     @FXML private JFXPasswordField passwordField;
     @FXML private StackPane stackPane;
     private CSVReader csvReader;
+    protected static User currentUser;
 
     /**
      * Runs on Scene load.
@@ -40,6 +42,7 @@ public class LoginController {
     /**
      * Method called on the Login Button click.
      * Checks if the current combination of the username and password exist and are correct.
+     * Switches the scene to the Dashboard and initializes the current User if True, otherwise it displays an error.
      * @throws IOException
      */
     @FXML
@@ -49,6 +52,7 @@ public class LoginController {
         if (csvReader.getDataString(3).contains(username)) {
             String correctUserPassword = csvReader.getDataString(4).get(csvReader.getDataString(3).indexOf(username));
             if (password.equals(correctUserPassword)) {
+                currentUser = this.buildUser();
                 this.allowEntry();
             } else {
                 JFXDialog dialog = new JFXDialog();
@@ -80,5 +84,22 @@ public class LoginController {
         Stage currentStage = (Stage) pane.getScene().getWindow();
         currentStage.setScene(new Scene(newRoot, 600, 400));
         currentStage.getScene().setFill(Color.TRANSPARENT);
+    }
+
+    /**
+     * Initializes the current User.
+     * @return User that represents that current User.
+     */
+    private User buildUser() {
+        for (String currStr : csvReader.getAllData()) {
+            if (currStr.contains(usernameField.getText())) {
+                String[] splitStr = currStr.split(",");
+                String firstName = splitStr[0];
+                String lastName = splitStr[1];
+                int balance = Integer.parseInt(splitStr[splitStr.length - 1]);
+                return new User(firstName, lastName, balance);
+            }
+        }
+        return null;
     }
 }

@@ -1,5 +1,6 @@
 package Dependencies.Games;
 
+import Dependencies.Systems.User;
 import Dependencies.Systems.UserManager;
 
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ import java.util.ArrayList;
  */
 public class GamblingGame {
     // The UserManager being used for the current Game.
-    protected UserManager userManager;
+    public UserManager userManager;
     // The String that represents the generated Hash.
     protected String generatedHash;
     // The ArrayList of Strings that represents all the Hashes that have already been generated.
@@ -27,9 +28,11 @@ public class GamblingGame {
      */
     public GamblingGame() {
         userManager = new UserManager();
-        generatedHash = this.generateRandomHash();
         generatedHashes = new ArrayList<>();
+        generatedHash = this.generateRandomHash();
     }
+
+    public void addCurrentPlayer(User user) { this.userManager.addActiveUser(user); }
 
     /**
      * Add a Hash to the ArrayList that contains all generated Hashes.
@@ -47,8 +50,8 @@ public class GamblingGame {
         boolean hashIsRandom = false;
         while (!hashIsRandom) {
             for (int i = 0; i < length; i++) {
-                int randomChoice = (int) (Math.random() * alphaNum.length());
-                hash += alphaNum.substring(randomChoice, alphaNum.length() - randomChoice);
+                int randomChoice = (int) (Math.random() * alphaNum.length() - 1);
+                hash += alphaNum.charAt(randomChoice);
             }
             if (!generatedHashes.contains(hash)) { hashIsRandom = true; }
         }
