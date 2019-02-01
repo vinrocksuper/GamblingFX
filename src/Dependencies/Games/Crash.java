@@ -17,6 +17,7 @@ public class Crash extends GamblingGame {
     private double bustingMultiplier;
     // HashMap that represents each player along with their multiplier.
     private HashMap<User, Double> currentPlayerMultipliers;
+    private HashMap<User, Integer> currentPlayerBets;
 
     /**
      * Main Constructor.
@@ -25,6 +26,7 @@ public class Crash extends GamblingGame {
         this.currentMultiplier = generateRandomMultiplier();
         this.bustingMultiplier = generateRandomMultiplier();
         currentPlayerMultipliers = generateInitialPlayerMap(userManager.getCurrentActiveUsers());
+        this.currentPlayerBets = generateInitialBetMap(userManager.getCurrentActiveUsers());
     }
 
     // Getters & Setters for some private fields.
@@ -49,7 +51,13 @@ public class Crash extends GamblingGame {
         }
         return playerMap;
     }
-
+    private HashMap<User, Integer> generateInitialBetMap(ArrayList<User> userList) {
+        HashMap<User, Integer> betMap = new HashMap<>();
+        for (User currUser : userList) {
+            betMap.put(currUser, 0);
+        }
+        return betMap;
+    }
     /**
      * Updates all of the multipliers of the players that are currently playing.
      */
@@ -59,4 +67,8 @@ public class Crash extends GamblingGame {
             currentPlayerMultipliers.replace(currUser, currentMultiplier);
         }
     }
+    public void placedBet(int bet, User currUser){
+        currentPlayerBets.replace(currUser, bet);
+    }
+
 }
