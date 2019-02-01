@@ -4,6 +4,8 @@ import Dependencies.Games.Crash;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXTextField;
+import javafx.animation.Animation;
+import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
@@ -11,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Circle;
 
 /**
  * Controller for the Crash Game Scene.
@@ -19,7 +22,7 @@ import javafx.scene.layout.VBox;
  */
 public class CrashGameController {
     @FXML private Pane pane;
-    @FXML private LineChart graph;
+    @FXML private Circle circle;
     @FXML private VBox playerList;
     @FXML private JFXTextField amountField;
     @FXML private JFXButton playButton;
