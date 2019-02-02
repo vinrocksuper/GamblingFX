@@ -6,7 +6,7 @@ import java.util.HashMap;
 /**
  * User Manager.
  * @Author Afaq Anwar
- * @Version 01/31/2019
+ * @Version 02/02/2019
  */
 public class UserManager {
     // ArrayList containing all active Users.
