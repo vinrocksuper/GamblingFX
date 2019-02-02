@@ -35,7 +35,6 @@ public class CrashGameController {
     public void initialize() {
         crashGame = new Crash();
         crashGame.addCurrentPlayer(LoginController.currentUser);
-        animateCircle();
     }
 
     /**

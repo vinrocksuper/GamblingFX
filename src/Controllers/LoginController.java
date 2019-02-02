@@ -21,7 +21,7 @@ import java.io.IOException;
 /**
  * Controller for the Login Scene.
  * @Author Afaq Anwar
- * @Version 01/31/19
+ * @Version 02/02/19
  */
 public class LoginController {
     @FXML private Pane pane;
@@ -66,10 +66,6 @@ public class LoginController {
         }
     }
 
-    /**
-     * Allows entry into the Dashboard Scene.
-     * @throws IOException
-     */
     private void allowEntry() throws IOException {
         Parent newRoot = FXMLLoader.load(getClass().getResource("/Resources/FXML/Dashboard.fxml"));
         Stage currentStage = (Stage) pane.getScene().getWindow();
