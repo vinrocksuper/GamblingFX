@@ -21,7 +21,7 @@ import java.io.IOException;
 /**
  * Controller for the Login Scene.
  * @Author Afaq Anwar
- * @Version 01/31/19
+ * @Version 02/02/19
  */
 public class LoginController {
     @FXML private Pane pane;

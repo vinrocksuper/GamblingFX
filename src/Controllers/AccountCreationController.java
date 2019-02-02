@@ -22,7 +22,7 @@ import java.util.List;
 /**
  * Controller for the Account Creation Scene.
  * @Author Afaq Anwar
- * @Version 01/30/19
+ * @Version 02/02/19
  */
 public class AccountCreationController {
     @FXML private Pane pane;
@@ -83,7 +83,7 @@ public class AccountCreationController {
      * Adds current data to the existing data, as long as the User does not already exist.
      */
     private void addCurrentData() {
-        existingData.add(firstNameField.getText() + "," + lastNameField.getText() + "," + usernameField.getText() + "," + passwordField.getText());
+        existingData.add(firstNameField.getText() + "," + lastNameField.getText() + "," + usernameField.getText() + "," + passwordField.getText() + "," + "100");
     }
 
     /**
@@ -100,7 +100,7 @@ public class AccountCreationController {
      *      StringBuilder was used in order to optimize for future MS EXCEL Parsing.
      */
     private void writeToFile() {
-        stringBuilder.append("firstname,lastname,username,password");
+        stringBuilder.append("firstname,lastname,username,password,balance");
         stringBuilder.append("\n");
         for (String string : existingData) {
             String[] splitStr = string.split(",");
