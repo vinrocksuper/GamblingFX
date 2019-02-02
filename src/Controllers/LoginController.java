@@ -66,6 +66,10 @@ public class LoginController {
         }
     }
 
+    /**
+     * Allows entry into the Dashboard Scene.
+     * @throws IOException
+     */
     private void allowEntry() throws IOException {
         Parent newRoot = FXMLLoader.load(getClass().getResource("/Resources/FXML/Dashboard.fxml"));
         Stage currentStage = (Stage) pane.getScene().getWindow();

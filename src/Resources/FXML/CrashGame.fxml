@@ -8,14 +8,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 
-<Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@../CSS/CrashGame.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.CrashGameController">
+<Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@../CSS/CrashGame.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.CrashGameController">
    <children>
       <Label layoutX="335.0" layoutY="14.0" styleClass="title" text="Crash" />
-      <VBox fx:id="playerPane" alignment="CENTER" layoutX="486.0" layoutY="50.0" prefHeight="400.0" prefWidth="200.0" styleClass="player_list" />
-      <JFXTextField fx:id="amountField" layoutX="58.0" layoutY="388.0" styleClass="amount_field" />
-      <JFXButton fx:id="playButton" layoutX="220.0" layoutY="388.0" mnemonicParsing="false" onAction="#handleButtons" styleClass="play_button" text="Play" />
-      <JFXButton fx:id="clearButton" layoutX="284.0" layoutY="388.0" mnemonicParsing="false" onAction="#handleButtons" styleClass="clear_button" text="Clear" />
+      <VBox fx:id="playerPane" alignment="CENTER" layoutX="464.0" layoutY="31.0" prefHeight="400.0" prefWidth="200.0" styleClass="player_list" />
+      <JFXButton fx:id="playButton" layoutX="586.0" layoutY="463.0" mnemonicParsing="false" onAction="#handleButtons" styleClass="play_button" text="Play" />
+      <JFXButton fx:id="clearButton" layoutX="643.0" layoutY="463.0" mnemonicParsing="false" onAction="#handleButtons" styleClass="clear_button" text="Clear" />
       <StackPane fx:id="stackPane" layoutX="93.0" layoutY="425.0" prefHeight="50.0" prefWidth="200.0" />
-      <Circle fx:id="circle" fill="DODGERBLUE" layoutX="139.0" layoutY="225.0" radius="25.0" stroke="#ffffff00" strokeType="INSIDE" strokeWidth="0.0" styleClass="circle_shape" />
+      <Circle fx:id="circle" fill="DODGERBLUE" layoutX="200.0" layoutY="231.0" radius="25.0" stroke="#ffffff00" strokeType="INSIDE" strokeWidth="0.0" styleClass="circle_shape" />
+      <JFXTextField fx:id="amountField" layoutX="438.0" layoutY="463.0" styleClass="amount_field" />
    </children>
 </Pane>

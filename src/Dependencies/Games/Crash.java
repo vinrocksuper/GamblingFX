@@ -8,7 +8,7 @@ import java.util.HashMap;
 /**
  * Crash Game
  * @Authors Afaq Anwar & Wai Hin Leung
- * @Version 01/31/2019
+ * @Version 02/02/2019
  */
 public class Crash extends GamblingGame {
     // The current multiplier of the Game.
@@ -24,7 +24,7 @@ public class Crash extends GamblingGame {
      * Main Constructor.
      */
     public Crash() {
-        this.currentMultiplier = generateRandomMultiplier();
+        this.currentMultiplier = 0;
         this.bustingMultiplier = generateRandomMultiplier();
         currentPlayerMultipliers = generateInitialPlayerMap(userManager.getCurrentActiveUsers());
         this.currentPlayerBets = generateInitialBetMap(userManager.getCurrentActiveUsers());
@@ -35,12 +35,15 @@ public class Crash extends GamblingGame {
     public double getCurrentMultiplier() { return this.currentMultiplier; }
     public void setCurrentMultiplier(double currentMultiplier) { this.currentMultiplier = currentMultiplier; }
     public double getBustingMultiplier() { return this.bustingMultiplier; }
-    public boolean isGameRunning() { return this.gameRunning; }
+    public boolean isGameRunning() {
+        this.updateGameStatus();
+        return this.gameRunning;
+    }
 
     /**
      * @return Random Double between 0 - 10,000.
      */
-    private double generateRandomMultiplier() { return (Math.random() * 10000); }
+    private double generateRandomMultiplier() { return (Math.random() * 1000); }
 
     /**
      * Populates the HashMap with initial data.
@@ -54,6 +57,12 @@ public class Crash extends GamblingGame {
         }
         return playerMap;
     }
+
+    /**
+     * Populates the HashMap with initial data.
+     * @param userList The ArrayList of playing Users.
+     * @return HashMap that maps a User and an Integer.
+     */
     private HashMap<User, Integer> generateInitialBetMap(ArrayList<User> userList) {
         HashMap<User, Integer> betMap = new HashMap<>();
         for (User currUser : userList) {
@@ -61,6 +70,7 @@ public class Crash extends GamblingGame {
         }
         return betMap;
     }
+
     /**
      * Updates all of the multipliers of the players that are currently playing.
      */
@@ -70,10 +80,25 @@ public class Crash extends GamblingGame {
             currentPlayerMultipliers.replace(currUser, currentMultiplier);
         }
     }
-    public void placedBet(int bet, User currUser){
+
+    /**
+     * Updates the User's bet amount.
+     * @param bet Integer that represents the bet amount.
+     * @param currUser Any User.
+     */
+    public void placeBet(int bet, User currUser){
         currentPlayerBets.replace(currUser, bet);
     }
 
-    public void toggleGame() { this.gameRunning = !this.gameRunning; }
+    /**
+     * Makes sure the game is running while the current multiplier is less than the busting multiplier.
+     */
+    private void updateGameStatus() {
+       gameRunning = this.currentMultiplier <= this.bustingMultiplier;
+    }
 
+    /**
+     * Toggles the game status.
+     */
+    public void toggleGame() { this.gameRunning = !this.gameRunning; }
 }

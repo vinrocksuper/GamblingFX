@@ -64,4 +64,14 @@ public class UserManager {
             statusOfUsers.replace(user, status);
         }
     }
+
+    /**
+     * Validates the bet amount to make sure the User has enough balance.
+     * @param user Any User.
+     * @param amount The Integer representing the User's bet amount.
+     * @return True if the User has enough funds, false otherwise.
+     */
+    public boolean validateAmount(User user, int amount) {
+        return user.getBalance() >= amount;
+    }
 }
