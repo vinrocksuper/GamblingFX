@@ -6,7 +6,7 @@ import java.util.HashMap;
 /**
  * User Manager.
  * @Author Afaq Anwar
- * @Version 01/31/2019
+ * @Version 02/02/2019
  */
 public class UserManager {
     // ArrayList containing all active Users.
@@ -63,5 +63,15 @@ public class UserManager {
         } else {
             statusOfUsers.replace(user, status);
         }
+    }
+
+    /**
+     * Validates the bet amount to make sure the User has enough balance.
+     * @param user Any User.
+     * @param amount The Integer representing the User's bet amount.
+     * @return True if the User has enough funds, false otherwise.
+     */
+    public boolean validateAmount(User user, int amount) {
+        return user.getBalance() >= amount;
     }
 }
