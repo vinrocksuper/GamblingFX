@@ -5,6 +5,8 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXTextField;
 import javafx.animation.AnimationTimer;
+import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -13,10 +15,13 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 /**
  * Controller for the Crash Game Scene.
  * @Authors Afaq Anwar & Wai Hin Leung
- * @Version 02/02/2019
+ * @Version 02/03/2019
  */
 public class CrashGameController {
     @FXML private Pane pane;
@@ -26,6 +31,7 @@ public class CrashGameController {
     @FXML private JFXButton playButton;
     @FXML private JFXButton clearButton;
     @FXML private StackPane stackPane;
+    @FXML private Label timer;
 
     private Crash crashGame;
 
@@ -38,16 +44,53 @@ public class CrashGameController {
     }
 
     /**
+     * Initializes the 20 second timer before the Crash game starts.
+     */
+    private void startPregameTimer() {
+        Timer pregameTimer = new Timer();
+        TimerTask countdown = new TimerTask() {
+            int currSeconds = 20;
+            @Override
+            public void run() {
+                if (currSeconds > 0) {
+                    Platform.runLater(() -> timer.setText("Starting in: " + currSeconds + " Seconds"));
+                    currSeconds--;
+                } else {
+                    Platform.runLater(() -> timer.setVisible(false));
+                    this.cancel();
+                }
+            }
+        };
+        pregameTimer.schedule(countdown, 1000, 1000);
+    }
+
+    /**
+     * Increases the Crash game multiplier & updates the current multiplier of each player.
+     */
+    private void increaseMultiplier() {
+        AnimationTimer multiplierTimer = new AnimationTimer() {
+            @Override
+            public void handle(long now) {
+                if (crashGame.isGameRunning()) {
+                    crashGame.setCurrentMultiplier(crashGame.getCurrentMultiplier() + ((crashGame.getBustingMultiplier() / 5.7) * 0.01));
+                    crashGame.updatePlayerMultipliers();
+                } else {
+                    this.stop();
+                }
+            }
+        };
+        multiplierTimer.start();
+    }
+
+    /**
      * Animates the circle to visualize the current multiplier.
      */
-    public void animateCircle() {
+    private void animateCircle() {
         AnimationTimer animationTimer = new AnimationTimer() {
             @Override
             public void handle(long now) {
                if (crashGame.isGameRunning()) {
-                   crashGame.setCurrentMultiplier(crashGame.getCurrentMultiplier() + ((crashGame.getBustingMultiplier() / 5.7) * 0.01));
                    circle.setRadius(circle.getRadius() + (crashGame.getBustingMultiplier() / 5.7) * 0.002);
-                   crashGame.updatePlayerMultipliers();
                } else {
                    this.stop();
                }

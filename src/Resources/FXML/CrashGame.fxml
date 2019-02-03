@@ -11,11 +11,12 @@
 <Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@../CSS/CrashGame.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.CrashGameController">
    <children>
       <Label layoutX="335.0" layoutY="14.0" styleClass="title" text="Crash" />
-      <VBox fx:id="playerPane" alignment="CENTER" layoutX="464.0" layoutY="31.0" prefHeight="400.0" prefWidth="200.0" styleClass="player_list" />
+      <VBox fx:id="playerPane" alignment="CENTER" layoutX="464.0" layoutY="23.0" prefHeight="375.0" prefWidth="200.0" styleClass="player_list" />
       <JFXButton fx:id="playButton" layoutX="586.0" layoutY="463.0" mnemonicParsing="false" onAction="#handleButtons" styleClass="play_button" text="Play" />
       <JFXButton fx:id="clearButton" layoutX="643.0" layoutY="463.0" mnemonicParsing="false" onAction="#handleButtons" styleClass="clear_button" text="Clear" />
-      <StackPane fx:id="stackPane" layoutX="93.0" layoutY="425.0" prefHeight="50.0" prefWidth="200.0" />
+      <StackPane fx:id="stackPane" layoutX="464.0" layoutY="413.0" prefHeight="50.0" prefWidth="200.0" />
       <Circle fx:id="circle" fill="DODGERBLUE" layoutX="200.0" layoutY="231.0" radius="25.0" stroke="#ffffff00" strokeType="INSIDE" strokeWidth="0.0" styleClass="circle_shape" />
       <JFXTextField fx:id="amountField" layoutX="438.0" layoutY="463.0" styleClass="amount_field" />
+      <Label fx:id="timer" layoutX="170.0" layoutY="467.0" styleClass="title" text="Starting in: " textAlignment="CENTER" />
    </children>
 </Pane>

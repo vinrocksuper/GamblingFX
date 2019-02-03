@@ -76,8 +76,9 @@ public class Crash extends GamblingGame {
      */
     public void updatePlayerMultipliers() {
         for (User currUser : this.userManager.getCurrentActiveUsers()) {
-            if (userManager.getStatusOfUser(currUser).equals("Playing"))
-            currentPlayerMultipliers.replace(currUser, currentMultiplier);
+            if (userManager.getStatusOfUser(currUser).equals("Playing")) {
+                currentPlayerMultipliers.replace(currUser, currentMultiplier);
+            }
         }
     }
 
