@@ -1,14 +1,20 @@
 package Dependencies.Games;
 
-public class Coinflip {
+import java.awt.event.ActionEvent;
 
-/**
- * To be coded later.
-    public boolean bet(int b, ActionEvent choice)
+public class Coinflip extends GamblingGame{
+
+    public boolean heads = false;
+
+
+    public void bet(int b)
     {
-        return true;
+        if(roll(heads))
+        {
+
+        }
     }
- **/
+
     public boolean roll(boolean head)
     {
         double roll = Math.random();
