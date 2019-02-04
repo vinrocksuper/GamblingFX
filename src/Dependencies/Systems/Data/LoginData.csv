@@ -1,2 +1,2 @@
-firstname,lastname,username,password
-admin,admin,root,toor,0
+firstname,lastname,username,password,balance
+admin,admin,root,toor,1000000000
