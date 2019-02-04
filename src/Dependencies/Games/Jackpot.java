@@ -13,7 +13,7 @@ public class Jackpot extends GamblingGame
     // The total of every single bet
     private int betTotal;
 
-    private HashMap<User, Integer> currentPlayerBet;
+    private HashMap<User,Integer> currentPlayerBet;
 
     public Jackpot()
     {
