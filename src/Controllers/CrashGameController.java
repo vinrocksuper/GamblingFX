@@ -32,6 +32,7 @@ public class CrashGameController {
     @FXML private JFXButton clearButton;
     @FXML private StackPane stackPane;
     @FXML private Label timer;
+    @FXML private Label textMultiplier;
 
     private Crash crashGame;
 
@@ -41,15 +42,16 @@ public class CrashGameController {
     public void initialize() {
         crashGame = new Crash();
         crashGame.addCurrentPlayer(LoginController.currentUser);
+        this.startPregameTimer();
     }
 
     /**
-     * Initializes the 20 second timer before the Crash game starts.
+     * Initializes the 10 second timer before the Crash game starts.
      */
     private void startPregameTimer() {
         Timer pregameTimer = new Timer();
         TimerTask countdown = new TimerTask() {
-            int currSeconds = 20;
+            int currSeconds = 10;
             @Override
             public void run() {
                 if (currSeconds > 0) {
@@ -57,6 +59,10 @@ public class CrashGameController {
                     currSeconds--;
                 } else {
                     Platform.runLater(() -> timer.setVisible(false));
+                    Platform.runLater(() -> disableControls(true));
+                    Platform.runLater(() -> increaseMultiplier());
+                    Platform.runLater(() -> animateTextMultiplier());
+                    Platform.runLater(() -> animateCircle());
                     this.cancel();
                 }
             }
@@ -74,6 +80,21 @@ public class CrashGameController {
                 if (crashGame.isGameRunning()) {
                     crashGame.setCurrentMultiplier(crashGame.getCurrentMultiplier() + ((crashGame.getBustingMultiplier() / 5.7) * 0.01));
                     crashGame.updatePlayerMultipliers();
+                } else {
+                    this.stop();
+                }
+            }
+        };
+        multiplierTimer.start();
+    }
+
+
+    private void animateTextMultiplier() {
+        AnimationTimer multiplierTimer = new AnimationTimer() {
+            @Override
+            public void handle(long now) {
+                if (crashGame.isGameRunning()) {
+                    textMultiplier.setText(Double.toString(crashGame.getCurrentMultiplier()));
                 } else {
                     this.stop();
                 }
@@ -151,5 +172,11 @@ public class CrashGameController {
             dialog.setContent(new Label("Insufficient Funds!"));
             dialog.show(stackPane);
         }
+    }
+
+    private void disableControls(boolean bool) {
+        playButton.setDisable(bool);
+        clearButton.setDisable(bool);
+        amountField.setDisable(bool);
     }
 }
