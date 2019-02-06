@@ -18,6 +18,10 @@ public class Coinflip extends GamblingGame{
         {
 
         }
+        if(!heads && greenPos<180)
+        {
+
+        }
     }
 
     public boolean roll(boolean head)
