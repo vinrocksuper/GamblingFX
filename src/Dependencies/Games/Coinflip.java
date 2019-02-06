@@ -5,14 +5,11 @@ import java.awt.event.ActionEvent;
 public class Coinflip extends GamblingGame{
 
     public boolean heads = false;
+    private double greenPos = 180;
 
-
-    public void bet(int b)
+    public void bet(int b, double rotateAmnt)
     {
-        if(roll(heads))
-        {
-
-        }
+        System.out.println("I got this far");
     }
 
     public boolean roll(boolean head)
