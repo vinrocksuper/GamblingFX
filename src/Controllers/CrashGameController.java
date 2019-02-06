@@ -14,14 +14,16 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
+import sun.rmi.runtime.Log;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
 /**
  * Controller for the Crash Game Scene.
+ * TO DO - Multi Colored Circles, PlayerList, Update player balance.
  * @Authors Afaq Anwar & Wai Hin Leung
- * @Version 02/03/2019
+ * @Version 02/06/2019
  */
 public class CrashGameController {
     @FXML private Pane pane;
@@ -58,11 +60,10 @@ public class CrashGameController {
                     Platform.runLater(() -> timer.setText("Starting in: " + currSeconds + " Seconds"));
                     currSeconds--;
                 } else {
+                    Platform.runLater(() -> disableControls(false));
                     Platform.runLater(() -> timer.setVisible(false));
-                    Platform.runLater(() -> disableControls(true));
-                    Platform.runLater(() -> increaseMultiplier());
-                    Platform.runLater(() -> animateTextMultiplier());
-                    Platform.runLater(() -> animateCircle());
+                    Platform.runLater(() -> disableFunctionalControls(true));
+                    Platform.runLater(() -> animateGame());
                     this.cancel();
                 }
             }
@@ -71,53 +72,23 @@ public class CrashGameController {
     }
 
     /**
-     * Increases the Crash game multiplier & updates the current multiplier of each player.
+     * Animates the game using critical functions.
      */
-    private void increaseMultiplier() {
-        AnimationTimer multiplierTimer = new AnimationTimer() {
+    private void animateGame() {
+        AnimationTimer gameTimer = new AnimationTimer() {
             @Override
             public void handle(long now) {
                 if (crashGame.isGameRunning()) {
                     crashGame.setCurrentMultiplier(crashGame.getCurrentMultiplier() + ((crashGame.getBustingMultiplier() / 5.7) * 0.01));
                     crashGame.updatePlayerMultipliers();
+                    textMultiplier.setText(Double.toString((double) Math.round(crashGame.getCurrentMultiplier() * 100) / 100));
+                    circle.setRadius(circle.getRadius() + 0.1);
                 } else {
                     this.stop();
                 }
             }
         };
-        multiplierTimer.start();
-    }
-
-
-    private void animateTextMultiplier() {
-        AnimationTimer multiplierTimer = new AnimationTimer() {
-            @Override
-            public void handle(long now) {
-                if (crashGame.isGameRunning()) {
-                    textMultiplier.setText(Double.toString(crashGame.getCurrentMultiplier()));
-                } else {
-                    this.stop();
-                }
-            }
-        };
-        multiplierTimer.start();
-    }
-
-    /**
-     * Animates the circle to visualize the current multiplier.
-     */
-    private void animateCircle() {
-        AnimationTimer animationTimer = new AnimationTimer() {
-            @Override
-            public void handle(long now) {
-               if (crashGame.isGameRunning()) {
-                   circle.setRadius(circle.getRadius() + (crashGame.getBustingMultiplier() / 5.7) * 0.002);
-               } else {
-                   this.stop();
-               }
-            }
-        };
-        animationTimer.start();
+        gameTimer.start();
     }
 
     /**
@@ -126,14 +97,16 @@ public class CrashGameController {
      */
     @FXML
     private void handleButtons(ActionEvent actionEvent) {
-        if (actionEvent.getSource() == playButton && crashGame.userManager.getStatusOfUser(LoginController.currentUser).equals("Playing")) {
+        if (actionEvent.getSource() == playButton && crashGame.userManager.getStatusOfUser(LoginController.currentUser).equals("Playing") && crashGame.isGameRunning()) {
             crashGame.userManager.setStatusOfUser(LoginController.currentUser, "Won");
+            this.displayWinningAlert();
             playButton.setText("Play");
         } else if (actionEvent.getSource() == playButton) {
             if (validateBet()) {
                 crashGame.userManager.setStatusOfUser(LoginController.currentUser, "Playing");
                 crashGame.placeBet(Integer.parseInt(amountField.getText()), LoginController.currentUser);
                 playButton.setText("Withdraw");
+                this.disableControls(true);
             } else {
                 this.displayAlert();
             }
@@ -148,8 +121,10 @@ public class CrashGameController {
      * @return True if it meets the requirements, false otherwise.
      */
     private boolean validateBet() {
-      return (amountField.getText().matches("[0-9]") && amountField.getText().length() < 10 && amountField.getText().length() > 0 && crashGame.userManager.validateAmount(LoginController.currentUser, Integer.parseInt(amountField.getText())));
+      return (amountField.getText().length() < 10 && amountField.getText().length() > 0 && crashGame.userManager.validateAmount(LoginController.currentUser, Integer.parseInt(amountField.getText())));
     }
+
+
 
     /**
      * Displays alerts based on the user error.
@@ -172,6 +147,18 @@ public class CrashGameController {
             dialog.setContent(new Label("Insufficient Funds!"));
             dialog.show(stackPane);
         }
+    }
+
+    private void displayWinningAlert() {
+        JFXDialog dialog = new JFXDialog();
+        dialog.setContent(new Label("You have won " + Math.floor(crashGame.getPlayerBet(LoginController.currentUser) * crashGame.getPlayerMultiplier(LoginController.currentUser))));
+        dialog.show(stackPane);
+    }
+
+
+    private void disableFunctionalControls(boolean bool) {
+        amountField.setDisable(true);
+        clearButton.setDisable(bool);
     }
 
     private void disableControls(boolean bool) {

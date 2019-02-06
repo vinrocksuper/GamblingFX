@@ -39,11 +39,17 @@ public class Crash extends GamblingGame {
         this.updateGameStatus();
         return this.gameRunning;
     }
+    public Integer getPlayerBet(User user) { return this.currentPlayerBets.get(user); }
+    public Double getPlayerMultiplier(User user) { return this.currentPlayerMultipliers.get(user); }
 
     /**
      * @return Random Double between 0 - 10,000.
      */
-    private double generateRandomMultiplier() { return (Math.random() * 1000); }
+    private double generateRandomMultiplier() {
+        double randomChance = (Math.random() * 0.4);
+        System.out.println(randomChance);
+        return (Math.random() * 1000) * randomChance;
+    }
 
     /**
      * Populates the HashMap with initial data.
@@ -77,7 +83,11 @@ public class Crash extends GamblingGame {
     public void updatePlayerMultipliers() {
         for (User currUser : this.userManager.getCurrentActiveUsers()) {
             if (userManager.getStatusOfUser(currUser).equals("Playing")) {
-                currentPlayerMultipliers.replace(currUser, currentMultiplier);
+                if (currentPlayerMultipliers.containsKey(currUser)) {
+                    currentPlayerMultipliers.replace(currUser, currentMultiplier);
+                } else {
+                    currentPlayerMultipliers.put(currUser, currentMultiplier);
+                }
             }
         }
     }
@@ -88,7 +98,12 @@ public class Crash extends GamblingGame {
      * @param currUser Any User.
      */
     public void placeBet(int bet, User currUser){
-        currentPlayerBets.replace(currUser, bet);
+        userManager.updatePlayerBalance(currUser, currUser.getBalance() - bet);
+        if (currentPlayerBets.containsKey(currUser)) {
+            currentPlayerBets.replace(currUser, bet);
+        } else {
+            currentPlayerBets.put(currUser, bet);
+        }
     }
 
     /**
