@@ -62,7 +62,7 @@
          </font>
       </Text>
       <TextField layoutX="8.0" layoutY="227.0" prefHeight="35.0" prefWidth="108.0" />
-      <Button layoutX="123.0" layoutY="232.0" mnemonicParsing="false" text="Submit" />
+      <Button fx:id="submitButton" layoutX="123.0" layoutY="232.0" mnemonicParsing="false" text="Submit" />
       <Text fill="RED" layoutX="71.0" layoutY="299.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time Left: ">
          <font>
             <Font size="24.0" />
@@ -83,5 +83,6 @@
             <Font size="18.0" />
          </font>
       </Label>
+      <Button fx:id="startButton" layoutX="2.0" layoutY="2.0" mnemonicParsing="false" text="Start" />
    </children>
 </Pane>
