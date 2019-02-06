@@ -9,7 +9,15 @@ public class Coinflip extends GamblingGame{
 
     public void bet(int b, double rotateAmnt)
     {
-        System.out.println("I got this far");
+        greenPos += rotateAmnt;
+        if(greenPos >360)
+        {
+            greenPos -=360;
+        }
+        if(heads && greenPos>=180)
+        {
+
+        }
     }
 
     public boolean roll(boolean head)

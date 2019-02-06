@@ -75,10 +75,12 @@ public class CoinflipController implements Initializable {
         }
         if(e.getSource()==h)
         {
+            cf.heads =true;
             cf.bet(Integer.parseInt(amount.getText()),rotate());
         }
         if(e.getSource()==t)
         {
+            cf.heads=false;
             cf.bet(Integer.parseInt(amount.getText()),rotate());
         }
 
