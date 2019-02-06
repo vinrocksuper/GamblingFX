@@ -63,26 +63,26 @@
       </Text>
       <TextField layoutX="8.0" layoutY="227.0" prefHeight="35.0" prefWidth="108.0" />
       <Button fx:id="submitButton" layoutX="123.0" layoutY="232.0" mnemonicParsing="false" text="Submit" />
-      <Text fill="RED" layoutX="71.0" layoutY="299.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time Left: ">
+      <Text fill="RED" layoutX="12.0" layoutY="298.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time Left: ">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Label fx:id="timeNum" layoutX="86.0" layoutY="305.0" text="timeNum" textFill="#ff2b2b">
+      <Label fx:id="timeNum" layoutX="123.0" layoutY="277.0" text="timeNum" textFill="#ff2b2b">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Text layoutX="3.0" layoutY="364.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Percentage of Winning">
+      <Text layoutX="5.0" layoutY="339.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Percentage of Winning">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Label fx:id="winPercent" layoutX="79.0" layoutY="378.0" text="winPercent" textFill="#00ff2f">
+      <Label fx:id="winPercent" layoutX="77.0" layoutY="353.0" text="winPercent" textFill="#00ff2f">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Button fx:id="startButton" layoutX="2.0" layoutY="2.0" mnemonicParsing="false" text="Start" />
+      <Button fx:id="startButton" layoutX="100.0" layoutY="395.0" mnemonicParsing="false" onAction="#start" prefHeight="27.0" prefWidth="54.0" text="Start" />
    </children>
 </Pane>
