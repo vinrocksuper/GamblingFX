@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@../CSS/JackpotGame.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.JackpotController">
+<Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: white;" stylesheets="@../CSS/JackpotGame.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.JackpotController">
    <children>
       <Line endX="600.0" layoutX="101.0" layoutY="73.0" startX="-100.0" />
       <Line endX="415.0" layoutX="93.0" layoutY="250.0" rotate="90.0" startX="-100.0" />
@@ -19,12 +19,12 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Label layoutX="123.0" layoutY="30.0" prefHeight="43.0" prefWidth="118.0" text="totalBet">
+      <Label fx:id="totalBet" layoutX="123.0" layoutY="30.0" prefHeight="43.0" prefWidth="118.0" text="totalBet">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Label layoutX="8.0" layoutY="84.0" text="YourName">
+      <Label fx:id="yourName" layoutX="8.0" layoutY="84.0" text="YourName">
          <font>
             <Font size="18.0" />
          </font>
@@ -34,7 +34,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="82.0" layoutY="111.0" text="balanceNum">
+      <Label fx:id="balanceNum" layoutX="82.0" layoutY="111.0" text="balanceNum">
          <font>
             <Font size="18.0" />
          </font>
@@ -44,15 +44,15 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="9.0" layoutY="165.0" text="currentBet">
+      <Label fx:id="currentBet" layoutX="9.0" layoutY="165.0" text="currentBet">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
       <TableView editable="true" layoutX="251.0" prefHeight="500.0" prefWidth="450.0">
         <columns>
-          <TableColumn prefWidth="150.0" text="Bet" />
-          <TableColumn prefWidth="150.0" text="Player Names" />
+          <TableColumn prefWidth="150.0" text="Player Name" />
+          <TableColumn prefWidth="150.0" text="Bet Amount" />
             <TableColumn prefWidth="150.0" text="Percentage to Win" />
         </columns>
       </TableView>
@@ -68,7 +68,17 @@
             <Font size="24.0" />
          </font>
       </Text>
-      <Label layoutX="86.0" layoutY="305.0" text="timeNum" textFill="#ff2b2b">
+      <Label fx:id="timeNum" layoutX="86.0" layoutY="305.0" text="timeNum" textFill="#ff2b2b">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Text layoutX="3.0" layoutY="364.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Percentage of Winning">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Label fx:id="winPercent" layoutX="79.0" layoutY="378.0" text="winPercent" textFill="#00ff2f">
          <font>
             <Font size="18.0" />
          </font>
