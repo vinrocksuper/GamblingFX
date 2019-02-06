@@ -9,18 +9,16 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.shape.Arc;
 import javafx.scene.transform.Rotate;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class CoinflipController implements Initializable {
 
-    @FXML private JFXTextField amount;
+    @FXML private TextField amount;
     @FXML private Button h;
     @FXML private Button t;
     @FXML private Arc red;
@@ -71,19 +69,17 @@ public class CoinflipController implements Initializable {
     }
 
     public void handler(javafx.event.ActionEvent e) {
-    /**    if(!validate())
+        if(!validate())
         {
             displayAlert();
-        }**/
-        if(e.getSource()==h )
-        {
-            double x = rotate();
-            cf.bet(100,x);
         }
-        if(e.getSource()==t )
+        if(e.getSource()==h)
         {
-            double x = rotate();
-            cf.bet(100,x);
+            cf.bet(Integer.parseInt(amount.getText()),rotate());
+        }
+        if(e.getSource()==t)
+        {
+            cf.bet(Integer.parseInt(amount.getText()),rotate());
         }
 
     }
