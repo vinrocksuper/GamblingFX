@@ -47,8 +47,8 @@ public class CoinflipController implements Initializable {
 
     public double rotate() {
         cf.setGreenPos(0);
-        red.getTransforms().add(new(Rotate());
-        black.getTransforms().add(new(Rotate());
+        red.setStartAngle(0);
+        black.setStartAngle(0);
         double rotateAmnt= 360*Math.random();
         System.out.println(rotateAmnt);
       //  long step = System.nanoTime() + 100000000L;
