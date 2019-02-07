@@ -45,35 +45,26 @@ public class CoinflipController implements Initializable {
     }
 
 
-    public double rotate() {
-        cf.setGreenPos(0);
-        double rotateAmnt= 360*Math.random();
-        System.out.println(rotateAmnt);
-      //  long step = System.nanoTime() + 100000000L;
+    public void rotate(double rotateAmnt) {
+        //long step = System.nanoTime() + 100000000L;
 
-        red.getTransforms().add(new Rotate(-cf.getGreenPos()));
-        black.getTransforms().add(new Rotate(-cf.getGreenPos()));
+        for(int i=0;i<rotateAmnt*20;i++) {
+            red.getTransforms().add(new Rotate(.05));
+            black.getTransforms().add(new Rotate(.05));
 
-        for(int i=0;i<rotateAmnt;i++) {
-            red.getTransforms().add(new Rotate(1));
-            black.getTransforms().add(new Rotate(1));
-        }
-
-        /**    new AnimationTimer() {
+          /**  new AnimationTimer() {
                 @Override
                 public void handle(long now) {
-                    if (now < step ) {
-                        red.getTransforms().add(new Rotate(1));
-                        black.getTransforms().add(new Rotate(1));
+                    if (now < step) {
+                        red.getTransforms().add(new Rotate(.05));
+                        black.getTransforms().add(new Rotate(.05));
 
                     }
 
                 }
-            }.start();
-        **/
+            }.start();**/
+        }
 
-
-        return rotateAmnt;
     }
 
     public void handler(javafx.event.ActionEvent e) {
@@ -83,9 +74,10 @@ public class CoinflipController implements Initializable {
         }
 
             cf.heads =true;
-            cf.bet(Integer.parseInt(amount.getText()),rotate(),LoginController.currentUser);
+            double x = cf.bet(Integer.parseInt(amount.getText()),LoginController.currentUser);
+            rotate(x);
             balance.setText(Integer.toString(LoginController.currentUser.getBalance()));
-             green.setText(Double.toString(cf.getGreenPos()));
+            green.setText(Double.toString(cf.getGreenPos()));
     }
     public void handlert(javafx.event.ActionEvent e) {
         if(!validate())
@@ -94,7 +86,8 @@ public class CoinflipController implements Initializable {
         }
 
             cf.heads =false;
-            cf.bet(Integer.parseInt(amount.getText()),rotate(),LoginController.currentUser);
+            double x = cf.bet(Integer.parseInt(amount.getText()),LoginController.currentUser);
+            rotate(x);
             balance.setText(Integer.toString(LoginController.currentUser.getBalance()));
             green.setText(Double.toString(cf.getGreenPos()));
 

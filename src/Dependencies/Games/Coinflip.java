@@ -12,8 +12,9 @@ public class Coinflip extends GamblingGame{
     //black = tails =false
     private double greenPos = 0;
 
-    public void bet(int b, double rotateAmnt,User u)
+    public double bet(int b,User u)
     {
+        double rotateAmnt = 360*Math.random();
         userManager.updatePlayerBalance(u,u.getBalance() + -b);
         greenPos += rotateAmnt;
         if(greenPos >360)
@@ -33,6 +34,7 @@ public class Coinflip extends GamblingGame{
         else{
             System.out.println("You lose " + b);
         }
+        return rotateAmnt;
     }
 
     public double getGreenPos()
