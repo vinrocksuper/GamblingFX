@@ -47,15 +47,17 @@ public class CoinflipController implements Initializable {
 
     public double rotate() {
         cf.setGreenPos(0);
-        red.setStartAngle(0);
-        black.setStartAngle(0);
         double rotateAmnt= 360*Math.random();
         System.out.println(rotateAmnt);
       //  long step = System.nanoTime() + 100000000L;
 
-            for(int i=0;i<rotateAmnt;i++) {
-                red.getTransforms().add(new Rotate(1));
-                black.getTransforms().add(new Rotate(1));
+        red.getTransforms().add(new Rotate(-cf.getGreenPos()));
+        black.getTransforms().add(new Rotate(-cf.getGreenPos()));
+
+        for(int i=0;i<rotateAmnt;i++) {
+            red.getTransforms().add(new Rotate(1));
+            black.getTransforms().add(new Rotate(1));
+        }
 
         /**    new AnimationTimer() {
                 @Override
@@ -70,7 +72,7 @@ public class CoinflipController implements Initializable {
             }.start();
         **/
 
-        }
+
         return rotateAmnt;
     }
 
@@ -79,7 +81,7 @@ public class CoinflipController implements Initializable {
         {
             displayAlert();
         }
-        System.out.println(e.getSource());
+
             cf.heads =true;
             cf.bet(Integer.parseInt(amount.getText()),rotate(),LoginController.currentUser);
             balance.setText(Integer.toString(LoginController.currentUser.getBalance()));
@@ -90,7 +92,7 @@ public class CoinflipController implements Initializable {
         {
             displayAlert();
         }
-        System.out.println(e.getSource());
+
             cf.heads =false;
             cf.bet(Integer.parseInt(amount.getText()),rotate(),LoginController.currentUser);
             balance.setText(Integer.toString(LoginController.currentUser.getBalance()));

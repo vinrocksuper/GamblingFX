@@ -20,12 +20,12 @@ public class Coinflip extends GamblingGame{
         {
             greenPos -=360;
         }
-        if(heads && greenPos>=180)
+        if(heads && greenPos>180)
         {
             userManager.updatePlayerBalance(u,u.getBalance() + 2*b);
             System.out.println("You won " + 2*b);
         }
-        else if(!heads && greenPos<180)
+        else if(!heads && greenPos<=180)
         {
             userManager.updatePlayerBalance(u,u.getBalance() + 2*b);
             System.out.println("You won " + 2*b);

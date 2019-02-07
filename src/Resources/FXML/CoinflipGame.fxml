@@ -12,7 +12,7 @@
    <children>
       <Arc fx:id="red" layoutX="350.0" layoutY="250.0" length="180.0" radiusX="100.0" radiusY="100.0" stroke="BLACK" strokeType="INSIDE" type="ROUND" />
       <Arc fx:id="black" fill="RED" layoutX="350.0" layoutY="250.0" length="180.0" radiusX="100.0" radiusY="100.0" startAngle="180.0" stroke="BLACK" strokeType="INSIDE" type="ROUND" />
-      <Polygon fill="#1fff67" layoutX="350.0" layoutY="160.0" rotate="180.0" scaleX="0.5" scaleY="0.75" stroke="BLACK" strokeType="INSIDE">
+      <Polygon fill="#1fff67" layoutX="467.0" layoutY="260.0" rotate="-90.0" scaleX="0.5" scaleY="0.75" stroke="BLACK" strokeType="INSIDE">
         <points>
           <Double fx:value="-50.0" />
           <Double fx:value="40.0" />
