@@ -26,7 +26,20 @@ public class Crash extends GamblingGame {
     public Crash() {
         this.currentMultiplier = 0;
         this.bustingMultiplier = generateRandomMultiplier();
-        currentPlayerMultipliers = generateInitialPlayerMap(userManager.getCurrentActiveUsers());
+        this.currentPlayerMultipliers = generateInitialPlayerMap(userManager.getCurrentActiveUsers());
+        this.currentPlayerBets = generateInitialBetMap(userManager.getCurrentActiveUsers());
+        this.gameRunning = false;
+    }
+
+    /**
+     * Secondary Constructor
+     * @param user Any User.
+     */
+    public Crash(User user) {
+        this.addCurrentPlayer(user);
+        this.currentMultiplier = 0;
+        this.bustingMultiplier = generateRandomMultiplier();
+        this.currentPlayerMultipliers = generateInitialPlayerMap(userManager.getCurrentActiveUsers());
         this.currentPlayerBets = generateInitialBetMap(userManager.getCurrentActiveUsers());
         this.gameRunning = false;
     }
@@ -46,7 +59,7 @@ public class Crash extends GamblingGame {
      * @return Random Double between 0 - 10,000.
      */
     private double generateRandomMultiplier() {
-        double randomChance = (Math.random() * 0.4);
+        double randomChance = (Math.random() * 0.1);
         System.out.println(randomChance);
         return (Math.random() * 1000) * randomChance;
     }
@@ -59,7 +72,7 @@ public class Crash extends GamblingGame {
     private HashMap<User, Double> generateInitialPlayerMap(ArrayList<User> userList) {
         HashMap<User, Double> playerMap = new HashMap<>();
         for (User currUser : userList) {
-            playerMap.put(currUser, 0.0);
+            playerMap.put(currUser, 0.00);
         }
         return playerMap;
     }
@@ -117,4 +130,21 @@ public class Crash extends GamblingGame {
      * Toggles the game status.
      */
     public void toggleGame() { this.gameRunning = !this.gameRunning; }
+
+    public void updatePlayersBalance() {
+        for (User user : currentPlayerBets.keySet()) {
+            if (userManager.getStatusOfUser(user).equals("Won")) {
+                userManager.updatePlayerBalance(user, user.getBalance() + (int) Math.floor(currentPlayerBets.get(user) * currentPlayerMultipliers.get(user)));
+            }
+        }
+    }
+
+    public void setLosingPlayers() {
+        for (User user : userManager.getStatusOfUsers().keySet()) {
+            if (userManager.getStatusOfUser(user).equals("Playing") && !gameRunning) {
+                System.out.println("hit");
+                userManager.setStatusOfUser(user, "Lost");
+            }
+        }
+    }
 }

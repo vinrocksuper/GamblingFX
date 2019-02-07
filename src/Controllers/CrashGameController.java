@@ -1,6 +1,7 @@
 package Controllers;
 
 import Dependencies.Games.Crash;
+import Dependencies.Systems.User;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXTextField;
@@ -21,14 +22,14 @@ import java.util.TimerTask;
 
 /**
  * Controller for the Crash Game Scene.
- * TO DO - Multi Colored Circles, PlayerList, Update player balance.
+ * TO DO - Multi Colored Circles, Infinite Game, Circle Animations
  * @Authors Afaq Anwar & Wai Hin Leung
  * @Version 02/06/2019
  */
 public class CrashGameController {
     @FXML private Pane pane;
     @FXML private Circle circle;
-    @FXML private VBox playerList;
+    @FXML private VBox playerPane;
     @FXML private JFXTextField amountField;
     @FXML private JFXButton playButton;
     @FXML private JFXButton clearButton;
@@ -42,8 +43,7 @@ public class CrashGameController {
      * Runs on Scene load.
      */
     public void initialize() {
-        crashGame = new Crash();
-        crashGame.addCurrentPlayer(LoginController.currentUser);
+        crashGame = new Crash(LoginController.currentUser);
         this.startPregameTimer();
     }
 
@@ -79,11 +79,14 @@ public class CrashGameController {
             @Override
             public void handle(long now) {
                 if (crashGame.isGameRunning()) {
-                    crashGame.setCurrentMultiplier(crashGame.getCurrentMultiplier() + ((crashGame.getBustingMultiplier() / 5.7) * 0.01));
+                    crashGame.setCurrentMultiplier(crashGame.getCurrentMultiplier() + ((crashGame.getBustingMultiplier() / 5.7) * 0.05));
                     crashGame.updatePlayerMultipliers();
                     textMultiplier.setText(Double.toString((double) Math.round(crashGame.getCurrentMultiplier() * 100) / 100));
-                    circle.setRadius(circle.getRadius() + 0.1);
+                    circle.setRadius(circle.getRadius() + ((crashGame.getBustingMultiplier() / 5.7) * 0.05));
+                    updatePlayerList();
                 } else {
+                    crashGame.setLosingPlayers();
+                    updatePlayerList();
                     this.stop();
                 }
             }
@@ -100,12 +103,15 @@ public class CrashGameController {
         if (actionEvent.getSource() == playButton && crashGame.userManager.getStatusOfUser(LoginController.currentUser).equals("Playing") && crashGame.isGameRunning()) {
             crashGame.userManager.setStatusOfUser(LoginController.currentUser, "Won");
             this.displayWinningAlert();
+            crashGame.updatePlayersBalance();
+            System.out.println(LoginController.currentUser.getBalance());
             playButton.setText("Play");
         } else if (actionEvent.getSource() == playButton) {
             if (validateBet()) {
                 crashGame.userManager.setStatusOfUser(LoginController.currentUser, "Playing");
                 crashGame.placeBet(Integer.parseInt(amountField.getText()), LoginController.currentUser);
                 playButton.setText("Withdraw");
+                this.updatePlayerList();
                 this.disableControls(true);
             } else {
                 this.displayAlert();
@@ -149,21 +155,50 @@ public class CrashGameController {
         }
     }
 
+
+    /**
+     * Displays a "winning" JFXDialog if the User has won the game.
+     */
     private void displayWinningAlert() {
         JFXDialog dialog = new JFXDialog();
         dialog.setContent(new Label("You have won " + Math.floor(crashGame.getPlayerBet(LoginController.currentUser) * crashGame.getPlayerMultiplier(LoginController.currentUser))));
         dialog.show(stackPane);
     }
 
-
+    /**
+     * Disables amount field, and clear button.
+     * @param bool
+     */
     private void disableFunctionalControls(boolean bool) {
         amountField.setDisable(true);
         clearButton.setDisable(bool);
     }
 
+    /**
+     * Disables controls.
+     * @param bool True if all controls are to be disabled, false otherwise.
+     */
     private void disableControls(boolean bool) {
         playButton.setDisable(bool);
         clearButton.setDisable(bool);
         amountField.setDisable(bool);
+    }
+
+    /**
+     * Updates the List of Players with Labels inside of the playerPane VBOX.
+     */
+    private void updatePlayerList() {
+        playerPane.getChildren().clear();
+        for (User user : crashGame.userManager.getCurrentActiveUsers()) {
+            Label userLabel = new Label();
+            if (!crashGame.userManager.getStatusOfUsers().containsKey(user)) {
+                userLabel.setText(user.getFirstName().toUpperCase() + " [IDLE]");
+            } else if (crashGame.userManager.getStatusOfUser(user).equals("Lost")) {
+               userLabel.setText(user.getFirstName().toUpperCase() + " [" + crashGame.userManager.getStatusOfUser(user) + "] BET: " + crashGame.getPlayerBet(user) + " @ X.XX");
+            } else {
+                userLabel.setText(user.getFirstName().toUpperCase() + " [" + crashGame.userManager.getStatusOfUser(user) + "] BET: " + crashGame.getPlayerBet(user) + " @ " +(double) Math.round(crashGame.getPlayerMultiplier(user) * 100) / 100);
+            }
+            playerPane.getChildren().add(userLabel);
+        }
     }
 }
