@@ -1,14 +1,19 @@
 package Controllers;
 
 import Dependencies.Games.Jackpot;
+import Dependencies.Systems.User;
+import Dependencies.Systems.UserManager;
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 import java.awt.event.ActionEvent;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class JackpotController
+public class JackpotController implements Initializable
 {
     @FXML private Label yourName;
     @FXML private Label balanceNum;
@@ -21,17 +26,13 @@ public class JackpotController
     private boolean gameState = false;
     private Jackpot jp;
 
-    public void intialize()
-    {
-        jp = new Jackpot();
-    }
 
     public void start()
     {
         if (!gameState)
         {
             gameState = true;
-            long step = System.nanoTime() + 10000000000L;
+            long step = System.nanoTime() + 15000000000L;
             new AnimationTimer()
             {
                 public void handle(long now)
@@ -52,5 +53,13 @@ public class JackpotController
     public void bet()
     {
 
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        jp = new Jackpot();
+        jp.addCurrentPlayer(LoginController.currentUser);
+        balanceNum.setText(Integer.toString(LoginController.currentUser.getBalance()));
+        yourName.setText(LoginController.currentUser.getFirstName() + " " + LoginController.currentUser.getLastName());
     }
 }

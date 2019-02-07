@@ -19,7 +19,7 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Label fx:id="totalBet" layoutX="123.0" layoutY="30.0" prefHeight="43.0" prefWidth="118.0" text="totalBet">
+      <Label fx:id="totalBet" layoutX="123.0" layoutY="30.0" prefHeight="43.0" prefWidth="118.0" text="0">
          <font>
             <Font size="24.0" />
          </font>
@@ -29,22 +29,22 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="8.0" layoutY="111.0" text="Balance:">
+      <Label layoutX="8.0" layoutY="118.0" text="Balance:">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id="balanceNum" layoutX="82.0" layoutY="111.0" text="balanceNum">
+      <Label fx:id="balanceNum" layoutX="78.0" layoutY="118.0" text="balanceNum">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="8.0" layoutY="138.0" text="Your Current Bet: ">
+      <Label layoutX="11.0" layoutY="152.0" text="Your Current Bet: ">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id="currentBet" layoutX="9.0" layoutY="165.0" text="currentBet">
+      <Label fx:id="currentBet" layoutX="162.0" layoutY="152.0" text="0">
          <font>
             <Font size="18.0" />
          </font>
@@ -56,33 +56,33 @@
             <TableColumn prefWidth="150.0" text="Percentage to Win" />
         </columns>
       </TableView>
-      <Text layoutX="8.0" layoutY="218.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bet:">
+      <Text layoutX="11.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bet:">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <TextField layoutX="8.0" layoutY="227.0" prefHeight="35.0" prefWidth="108.0" />
-      <Button fx:id="submitButton" layoutX="123.0" layoutY="232.0" mnemonicParsing="false" text="Submit" />
-      <Text fill="RED" layoutX="12.0" layoutY="298.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time Left: ">
+      <TextField layoutX="13.0" layoutY="233.0" prefHeight="35.0" prefWidth="108.0" />
+      <Button fx:id="submitButton" layoutX="135.0" layoutY="238.0" mnemonicParsing="false" text="Submit" />
+      <Text fill="RED" layoutX="12.0" layoutY="315.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time Left: ">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Label fx:id="timeNum" layoutX="123.0" layoutY="277.0" text="timeNum" textFill="#ff2b2b">
+      <Label fx:id="timeNum" layoutX="128.0" layoutY="292.0" text="Click start" textFill="#ff2b2b">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Text layoutX="5.0" layoutY="339.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Percentage of Winning">
+      <Text layoutX="2.0" layoutY="364.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Percentage of Winning">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Label fx:id="winPercent" layoutX="77.0" layoutY="353.0" text="winPercent" textFill="#00ff2f">
+      <Label fx:id="winPercent" layoutX="111.0" layoutY="387.0" text="0%" textFill="#00ff2f">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Button fx:id="startButton" layoutX="100.0" layoutY="395.0" mnemonicParsing="false" onAction="#start" prefHeight="27.0" prefWidth="54.0" text="Start" />
+      <Button fx:id="startButton" layoutX="99.0" layoutY="422.0" mnemonicParsing="false" onAction="#start" prefHeight="27.0" prefWidth="54.0" text="Start" />
    </children>
 </Pane>

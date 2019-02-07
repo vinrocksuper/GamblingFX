@@ -30,6 +30,12 @@ public class User {
     public String getLastName() { return lastName; }
     protected void setLastName(String lastName) { this.lastName = lastName; }
 
-    public int getBalance() { return balance; }
-    protected void setBalance(int balance) { this.balance = balance; }
+    public int getBalance()
+    {
+        return balance;
+    }
+    protected void setBalance(int balance)
+    {
+        this.balance = balance;
+    }
 }
