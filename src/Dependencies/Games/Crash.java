@@ -123,7 +123,7 @@ public class Crash extends GamblingGame {
      * Makes sure the game is running while the current multiplier is less than the busting multiplier.
      */
     private void updateGameStatus() {
-        gameRunning = this.currentMultiplier <= this.bustingMultiplier;
+       gameRunning = this.currentMultiplier <= this.bustingMultiplier;
     }
 
     /**

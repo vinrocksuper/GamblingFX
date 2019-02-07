@@ -127,7 +127,7 @@ public class CrashGameController {
      * @return True if it meets the requirements, false otherwise.
      */
     private boolean validateBet() {
-        return (amountField.getText().length() < 10 && amountField.getText().length() > 0 && crashGame.userManager.validateAmount(LoginController.currentUser, Integer.parseInt(amountField.getText())));
+      return (amountField.getText().length() < 10 && amountField.getText().length() > 0 && crashGame.userManager.validateAmount(LoginController.currentUser, Integer.parseInt(amountField.getText())));
     }
 
 
@@ -194,7 +194,7 @@ public class CrashGameController {
             if (!crashGame.userManager.getStatusOfUsers().containsKey(user)) {
                 userLabel.setText(user.getFirstName().toUpperCase() + " [IDLE]");
             } else if (crashGame.userManager.getStatusOfUser(user).equals("Lost")) {
-                userLabel.setText(user.getFirstName().toUpperCase() + " [" + crashGame.userManager.getStatusOfUser(user) + "] BET: " + crashGame.getPlayerBet(user) + " @ X.XX");
+               userLabel.setText(user.getFirstName().toUpperCase() + " [" + crashGame.userManager.getStatusOfUser(user) + "] BET: " + crashGame.getPlayerBet(user) + " @ X.XX");
             } else {
                 userLabel.setText(user.getFirstName().toUpperCase() + " [" + crashGame.userManager.getStatusOfUser(user) + "] BET: " + crashGame.getPlayerBet(user) + " @ " +(double) Math.round(crashGame.getPlayerMultiplier(user) * 100) / 100);
             }
