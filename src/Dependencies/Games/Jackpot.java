@@ -21,6 +21,10 @@ public class Jackpot extends GamblingGame
 
     private ArrayList<String> winPercent = new ArrayList<>();
 
+    private String win = "";
+
+    private int sum = 0;
+
     public Jackpot()
     {
         this.betTotal = betTotal;
@@ -28,12 +32,13 @@ public class Jackpot extends GamblingGame
         this.playerNames = playerNames;
         this.array3 = array3;
         this.winPercent = winPercent;
+        this.sum = sum;
+        this.win = win;
     }
 
     public ArrayList<String> fillArray()
     {
         Random rand = new Random();
-        int sum = 0;
         for(int i = 0; i < 5; i++)
         {
             playerPool.add(Integer.toString((rand.nextInt(50) + 20)));
@@ -99,7 +104,7 @@ public class Jackpot extends GamblingGame
     {
         Random k = new Random();
         int winningIndex = k.nextInt(bettingArray.size());
-        String win = bettingArray.get(winningIndex);
+        win = bettingArray.get(winningIndex);
         System.out.println("The Winner Is: " + win + ".");
         return win;
     }
