@@ -2,29 +2,22 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTextField?>
-<?import javafx.scene.chart.CategoryAxis?>
-<?import javafx.scene.chart.LineChart?>
-<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
 
-<Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@../CSS/CrashGame.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.CrashGameController">
-   <children>
-      <Label layoutX="335.0" layoutY="14.0" styleClass="title" text="Crash" />
-      <LineChart fx:id="graph" layoutX="14.0" layoutY="50.0" prefHeight="325.0" prefWidth="450.0">
-        <xAxis>
-          <CategoryAxis side="BOTTOM" />
-        </xAxis>
-        <yAxis>
-          <NumberAxis side="LEFT" />
-        </yAxis>
-      </LineChart>
-      <VBox fx:id="playerPane" alignment="CENTER" layoutX="486.0" layoutY="50.0" prefHeight="400.0" prefWidth="200.0" styleClass="player_list" />
-      <JFXTextField fx:id="amountField" layoutX="59.0" layoutY="388.0" styleClass="amount_field" />
-      <JFXButton fx:id="playButton" layoutX="220.0" layoutY="388.0" mnemonicParsing="false" onAction="#handleButtons" styleClass="play_button" text="Play" />
-      <JFXButton fx:id="clearButton" layoutX="283.0" layoutY="388.0" mnemonicParsing="false" onAction="#handleButtons" styleClass="clear_button" text="Clear" />
-      <StackPane fx:id="stackPane" layoutX="139.0" layoutY="425.0" prefHeight="50.0" prefWidth="200.0" />
-   </children>
+<Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@../CSS/CrashGame.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.CrashGameController">
+    <children>
+        <Label layoutX="335.0" layoutY="14.0" styleClass="title" text="Crash" />
+        <VBox fx:id="playerPane" alignment="CENTER" layoutX="464.0" layoutY="23.0" prefHeight="375.0" prefWidth="200.0" styleClass="player_list" />
+        <JFXButton fx:id="playButton" layoutX="586.0" layoutY="463.0" mnemonicParsing="false" onAction="#handleButtons" styleClass="play_button" text="Play" />
+        <JFXButton fx:id="clearButton" layoutX="643.0" layoutY="463.0" mnemonicParsing="false" onAction="#handleButtons" styleClass="clear_button" text="Clear" />
+        <StackPane fx:id="stackPane" layoutX="464.0" layoutY="413.0" prefHeight="50.0" prefWidth="200.0" />
+        <Circle fx:id="circle" fill="DODGERBLUE" layoutX="200.0" layoutY="231.0" stroke="#ffffff00" strokeType="INSIDE" strokeWidth="0.0" styleClass="circle_shape" />
+        <JFXTextField fx:id="amountField" layoutX="438.0" layoutY="463.0" styleClass="amount_field" />
+        <Label fx:id="timer" layoutX="170.0" layoutY="467.0" styleClass="title" text="Starting in: " textAlignment="CENTER" />
+        <Label fx:id="textMultiplier" layoutX="189.0" layoutY="223.0" text="0.0x" textAlignment="CENTER" />
+    </children>
 </Pane>
