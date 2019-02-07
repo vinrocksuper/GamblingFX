@@ -24,7 +24,7 @@ import java.util.TimerTask;
  * Controller for the Crash Game Scene.
  * TO DO - Multi Colored Circles, Infinite Game, Circle Animations
  * @Authors Afaq Anwar & Wai Hin Leung
- * @Version 02/06/2019
+ * @Version 02/07/2019
  */
 public class CrashGameController {
     @FXML private Pane pane;
