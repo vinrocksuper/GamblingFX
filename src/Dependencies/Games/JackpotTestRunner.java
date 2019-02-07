@@ -5,5 +5,7 @@ public class JackpotTestRunner {
     {
         Jackpot a = new Jackpot();
         a.fillArray();
+        a.bettingArr();
+        a.pickWinner();
     }
 }
