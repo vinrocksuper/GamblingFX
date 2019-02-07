@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.shape.Arc;
 import javafx.scene.transform.Rotate;
+import sun.rmi.runtime.Log;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -24,12 +25,13 @@ public class CoinflipController implements Initializable {
     @FXML private Arc red;
     @FXML private Arc black;
     @FXML private Label prompt;
-
+    @FXML private Label balance;
+    @FXML private Label green;
     private Coinflip cf;
 
     public boolean validate()
     {
-        return (amount.getText().matches("[0-9]") && amount.getText().length() < 10);
+        return (amount.getText().matches("[0-9]") && amount.getText().length() < 10 && LoginController.currentUser.getBalance() >Integer.parseInt(amount.getText()));
     }
 
     private void displayAlert() {
@@ -44,25 +46,29 @@ public class CoinflipController implements Initializable {
 
 
     public double rotate() {
-
+        cf.setGreenPos(0);
+        red.getTransforms().add(new(Rotate());
+        black.getTransforms().add(new(Rotate());
         double rotateAmnt= 360*Math.random();
-
-        long step = System.nanoTime() + 3000000000L;
+        System.out.println(rotateAmnt);
+      //  long step = System.nanoTime() + 100000000L;
 
             for(int i=0;i<rotateAmnt;i++) {
+                red.getTransforms().add(new Rotate(1));
+                black.getTransforms().add(new Rotate(1));
 
-            new AnimationTimer() {
+        /**    new AnimationTimer() {
                 @Override
                 public void handle(long now) {
                     if (now < step ) {
-                        red.getTransforms().add(new Rotate(.05));
-                        black.getTransforms().add(new Rotate(.05));
+                        red.getTransforms().add(new Rotate(1));
+                        black.getTransforms().add(new Rotate(1));
 
                     }
 
                 }
             }.start();
-
+        **/
 
         }
         return rotateAmnt;
@@ -73,16 +79,22 @@ public class CoinflipController implements Initializable {
         {
             displayAlert();
         }
-        if(e.getSource()==h)
-        {
+        System.out.println(e.getSource());
             cf.heads =true;
-            cf.bet(Integer.parseInt(amount.getText()),rotate());
-        }
-        if(e.getSource()==t)
+            cf.bet(Integer.parseInt(amount.getText()),rotate(),LoginController.currentUser);
+            balance.setText(Integer.toString(LoginController.currentUser.getBalance()));
+             green.setText(Double.toString(cf.getGreenPos()));
+    }
+    public void handlert(javafx.event.ActionEvent e) {
+        if(!validate())
         {
-            cf.heads=false;
-            cf.bet(Integer.parseInt(amount.getText()),rotate());
+            displayAlert();
         }
+        System.out.println(e.getSource());
+            cf.heads =false;
+            cf.bet(Integer.parseInt(amount.getText()),rotate(),LoginController.currentUser);
+            balance.setText(Integer.toString(LoginController.currentUser.getBalance()));
+            green.setText(Double.toString(cf.getGreenPos()));
 
     }
 
@@ -90,5 +102,6 @@ public class CoinflipController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         cf = new Coinflip();
         cf.addCurrentPlayer(LoginController.currentUser);
+        balance.setText(Integer.toString(LoginController.currentUser.getBalance()));
     }
 }

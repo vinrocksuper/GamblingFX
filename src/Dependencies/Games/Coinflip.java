@@ -1,5 +1,6 @@
 package Dependencies.Games;
 
+import Controllers.LoginController;
 import Dependencies.Systems.User;
 
 import java.awt.event.ActionEvent;
@@ -7,11 +8,13 @@ import java.awt.event.ActionEvent;
 public class Coinflip extends GamblingGame{
 
     public boolean heads = false;
-    private double greenPos = 180;
-    private User u;
+    //red = head = true
+    //black = tails =false
+    private double greenPos = 0;
 
-    public void bet(int b, double rotateAmnt)
+    public void bet(int b, double rotateAmnt,User u)
     {
+        userManager.updatePlayerBalance(u,u.getBalance() + -b);
         greenPos += rotateAmnt;
         if(greenPos >360)
         {
@@ -19,17 +22,25 @@ public class Coinflip extends GamblingGame{
         }
         if(heads && greenPos>=180)
         {
-            userManager.updatePlayerBalance(u,2*b);
+            userManager.updatePlayerBalance(u,u.getBalance() + 2*b);
             System.out.println("You won " + 2*b);
         }
-        if(!heads && greenPos<180)
+        else if(!heads && greenPos<180)
         {
-            userManager.updatePlayerBalance(u,2*b);
+            userManager.updatePlayerBalance(u,u.getBalance() + 2*b);
             System.out.println("You won " + 2*b);
         }
         else{
-            userManager.updatePlayerBalance(u,-b);
-            System.out.println("You lose " + -b);
+            System.out.println("You lose " + b);
         }
+    }
+
+    public double getGreenPos()
+    {
+        return greenPos;
+    }
+    public void setGreenPos(double x)
+    {
+        greenPos = x;
     }
 }
