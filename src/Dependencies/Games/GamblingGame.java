@@ -8,7 +8,7 @@ import java.util.ArrayList;
 /**
  * Gambling Game Class that sets up the base for each specific Game.
  * @Author Afaq Anwar
- * @Version 01/31/19
+ * @Version 02/07/2019
  */
 public class GamblingGame {
     // The UserManager being used for the current Game.

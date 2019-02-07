@@ -22,7 +22,7 @@ import java.util.List;
 /**
  * Controller for the Account Creation Scene.
  * @Author Afaq Anwar
- * @Version 02/02/19
+ * @Version 02/07/2019
  */
 public class AccountCreationController {
     @FXML private Pane pane;
