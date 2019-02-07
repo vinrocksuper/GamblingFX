@@ -3,7 +3,7 @@ package Dependencies.Systems;
 /**
  * Defines a User within the Application.
  * @Author Afaq Anwar
- * @Version 01/29/19
+ * @Version 02/07/2019
  */
 public class User {
     private String firstName;

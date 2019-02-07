@@ -8,7 +8,7 @@ import java.util.HashMap;
 /**
  * Crash Game
  * @Authors Afaq Anwar & Wai Hin Leung
- * @Version 02/06/2019
+ * @Version 02/07/2019
  */
 public class Crash extends GamblingGame {
     // The current multiplier of the Game.

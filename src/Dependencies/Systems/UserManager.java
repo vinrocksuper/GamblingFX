@@ -79,5 +79,4 @@ public class UserManager {
      * @param amount Integer that represents the amount
      */
     public void updatePlayerBalance(User user, int amount) { user.setBalance(amount); }
-
 }
