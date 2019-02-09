@@ -27,6 +27,8 @@ public class CoinflipController implements Initializable {
     @FXML private Label prompt;
     @FXML private Label balance;
     @FXML private Label green;
+    private double timer = 2000;
+    private double rotateSpeed;
     private Coinflip cf;
 
     public boolean validate()
@@ -44,28 +46,29 @@ public class CoinflipController implements Initializable {
         }
     }
 
-
-    public void rotate(double rotateAmnt) {
-        //long step = System.nanoTime() + 100000000L;
-
-        for(int i=0;i<rotateAmnt*20;i++) {
-            red.getTransforms().add(new Rotate(.05));
-            black.getTransforms().add(new Rotate(.05));
-
-          /**  new AnimationTimer() {
-                @Override
-                public void handle(long now) {
-                    if (now < step) {
-                        red.getTransforms().add(new Rotate(.05));
-                        black.getTransforms().add(new Rotate(.05));
-
-                    }
-
-                }
-            }.start();**/
+public void rotate(double rotateAmnt) {
+    h.setDisable(true);
+    t.setDisable(true);
+    timer = 100;
+    rotateSpeed = rotateAmnt;
+    new AnimationTimer() {
+        @Override
+        public void handle(long now) {
+            if(timer > 0)
+            {
+                timer -= 1;
+                red.getTransforms().add(new Rotate(rotateSpeed/100));
+                black.getTransforms().add(new Rotate(rotateSpeed/100));
+            }
+            else
+            {
+                h.setDisable(false);
+                t.setDisable(false);
+                this.stop();
+            }
         }
-
-    }
+    }.start();
+}
 
     public void handler(javafx.event.ActionEvent e) {
         if(!validate())
