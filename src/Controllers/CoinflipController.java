@@ -24,9 +24,8 @@ public class CoinflipController implements Initializable {
     @FXML private Button t;
     @FXML private Arc red;
     @FXML private Arc black;
-    @FXML private Label prompt;
+    @FXML private  Label prompt;
     @FXML private Label balance;
-    @FXML private Label green;
     private double timer = 2000;
     private double rotateSpeed;
     private Coinflip cf;
@@ -36,13 +35,21 @@ public class CoinflipController implements Initializable {
         return (amount.getText().matches("[0-9]") && amount.getText().length() < 10 && LoginController.currentUser.getBalance() >Integer.parseInt(amount.getText()));
     }
 
-    private void displayAlert() {
+    public void displayAlert() {
         if (amount.getText().matches("[^0-9]")) {
             prompt.setText("Bets are whole numbers only.");
 
         } else if (amount.getText().length() > 10) {
             prompt.setText("Please bet a smaller amount. (Less than 1 Billion.)");
 
+        }
+    }
+    public void displayAlert(boolean amnt, int b){
+        if(amnt) {
+            prompt.setText("You've won " + 2 * b);
+        }
+        else{
+            prompt.setText("You've lost " + b);
         }
     }
 
@@ -78,9 +85,11 @@ public void rotate(double rotateAmnt) {
 
             cf.heads =true;
             double x = cf.bet(Integer.parseInt(amount.getText()),LoginController.currentUser);
+
             rotate(x);
+            displayAlert(cf.win,Integer.parseInt(amount.getText()));
             balance.setText(Integer.toString(LoginController.currentUser.getBalance()));
-            green.setText(Double.toString(cf.getGreenPos()));
+
     }
     public void handlert(javafx.event.ActionEvent e) {
         if(!validate())
@@ -91,8 +100,9 @@ public void rotate(double rotateAmnt) {
             cf.heads =false;
             double x = cf.bet(Integer.parseInt(amount.getText()),LoginController.currentUser);
             rotate(x);
+            displayAlert(cf.win,Integer.parseInt(amount.getText()));
             balance.setText(Integer.toString(LoginController.currentUser.getBalance()));
-            green.setText(Double.toString(cf.getGreenPos()));
+
 
     }
 
